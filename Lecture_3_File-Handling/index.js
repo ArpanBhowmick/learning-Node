@@ -39,7 +39,7 @@ const create_dir = async (dir) => {
 await mkdir(dir, {recursive:true })
 }
 // create_dir("Public")
-create_dir("src/py")
+// create_dir("src/py")
 
 
 // src/components/jsva
