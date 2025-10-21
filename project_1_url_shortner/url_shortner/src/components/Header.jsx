@@ -13,7 +13,10 @@ const Header = () => {
         
 
             <div>
-                <h1 className="text-3xl font-extrabold">Url Shortner</h1>
+                <h1 className="text-3xl font-extrabold">
+                  Neon Short
+                  {/* Url Shortner */}
+                  </h1>
                 <p className="text-slate-400 text-sm">Futuristic URL shortener - with neon UI & interactive UX</p> 
             </div>
         
@@ -21,7 +24,7 @@ const Header = () => {
 
         {/* toggle dark/light mode  */}
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 border">
             <button id="themeToggle" className="">
                 toggle light
             </button>
