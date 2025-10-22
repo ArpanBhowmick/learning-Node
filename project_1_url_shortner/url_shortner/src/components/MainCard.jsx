@@ -1,8 +1,10 @@
 const MainCard = () => {
   return (
-    <section className="border-2 rounded-3xl p-6 m-5">
+    <section className="bg-gray-900 border border-cyan-500 shadow-lg shadow-cyan-500/30  rounded-3xl p-6 ">
+      {/* m-5 */}
       <div className="pb-5">
-        <h1 className="text-xl font-bold text-purple-700 [text-shadow:0_0_8px_rgb(124,58,237,0.9)]">
+        <h1 className="text-xl font-bold text-purple-700 ">
+          {/* [text-shadow:0_0_8px_rgb(124,58,237,0.9)] */}
           Shorten any link — instantly
           </h1>
         <p className="text-slate-400 mt-1 text-sm max-w-xl">
@@ -11,16 +13,22 @@ const MainCard = () => {
         </p>
       </div>
 
-      <form id="shrtnerForm" action="" className="mt-6 grid gap-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <form id="shrtnerForm"
+       action="" 
+       className="mt-6 grid gap-4">
+        <div
+         className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <input
+            id="longUrl"
             type="url"
             placeholder="https://example.com/very/long/path"
             required
-            className="col-span-2 rounded-lg px-4 py-3 bg-transparent border border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="col-span-2 rounded-lg px-4 py-3  border  border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 truncate"
           />
 
+           
           <input
+          
             type="text"
             placeholder="Custom-slug"
             className="rounded-lg px-4 py-3 bg-transparent border border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"

@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
 body{
-    background-color: rgb(79, 68, 92);
+    @apply bg-[rgb(79,68,92)] antialiased text-slate-200
+     
 }
+
+.neon-card { 
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); 
+  border: 1px solid rgba(124,58,237,0.12); 
+  box-shadow: 0 6px 30px rgba(7,10,28,0.7); 
+  backdrop-filter: blur(8px) saturate(120%);
+}
+/* bg-white/5 border border-indigo-700/20 shadow-[0_6px_30px_rgba(7,10,28,0.7)] backdrop-blur-sm backdrop-saturate-120 rounded-3xl p-4 */
+
+.neon-accent { 
+  color: #7c3aed; 
+  text-shadow: 0 0 8px rgba(124,58,237,0.9); 
+}
+/* text-lg font-semibold text-purple-600 drop-shadow-[0_0_8px_rgba(124,58,237,0.9)] */
+
