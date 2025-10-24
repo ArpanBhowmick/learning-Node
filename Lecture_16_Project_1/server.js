@@ -8,9 +8,7 @@ const PORT = 3000;
 app.use(express.urlencoded({extended: true}))
 
 mongoose.connect(
-  "mongodb+srv://arpanbhowmick28_db_user:MBJdXXZhBVOMd0nV@cluster0.bucfb7i.mongodb.net/", {
-    dbName: "NodeJs_Mastery_course"
-  }
+  "mongodb+srv://arpanbhowmick28_db_user:MBJdXXZhBVOMd0nV@cluster0.bucfb7i.mongodb.net/", { dbName: "NodeJs_Mastery_course" }
 ).then(()=> console.log("MongoDB connected..!")).catch((err)=> console.log(err))
 
 
@@ -23,6 +21,8 @@ app.get("/", (req, res)=>{
 app.post("/short", shortUrl)
 
 // redirect to original URL using short code: dynamic routing
+
+// i click on the shorted link it generaes a GET request and the server.js handles the request , its not connected to the ejs it handles the request by checking in the server.js automatically
 
 app.get("/:shortCode",getOriginalUrl)
 

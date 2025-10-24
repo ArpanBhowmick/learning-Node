@@ -1,21 +1,102 @@
 @import "tailwindcss";
 
-body{
+/* body{
     @apply bg-[rgb(79,68,92)] antialiased text-slate-200
+     min-h-screen grid place-items-center px-4 py-10
+     absolute inset-0 
      
-}
+} */
+/* .grid-bg {
+        background-image: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.02) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 60px 60px, 60px 60px;
+      } */
 
-.neon-card { 
+/* .neon-card { 
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); 
   border: 1px solid rgba(124,58,237,0.12); 
   box-shadow: 0 6px 30px rgba(7,10,28,0.7); 
   backdrop-filter: blur(8px) saturate(120%);
-}
+} */
 /* bg-white/5 border border-indigo-700/20 shadow-[0_6px_30px_rgba(7,10,28,0.7)] backdrop-blur-sm backdrop-saturate-120 rounded-3xl p-4 */
 
-.neon-accent { 
-  color: #7c3aed; 
-  text-shadow: 0 0 8px rgba(124,58,237,0.9); 
-}
+/* .neon {
+  @apply bg-[#0a0f1f]/60 border border-cyan-400/40  backdrop-blur-md
+} */
+/* bg-[#0a0f1f]/60 border border-cyan-400/40 shadow-[0_0_15px_rgba(34,211,238,0.4)] backdrop-blur-md */
+
+/* .btn-outline-neon { */
+/* border: 1px solid rgba(139, 92, 246, 0.18);/ */
+/* box-shadow: 0 6px 30px rgba(7, 12, 45, 0.5); */
+/* } */
+
+/* .neon-accent {
+  color: #7c3aed;
+  text-shadow: 0 0 8px rgba(124, 58, 237, 0.9);
+} */
 /* text-lg font-semibold text-purple-600 drop-shadow-[0_0_8px_rgba(124,58,237,0.9)] */
 
+
+
+
+
+
+
+
+
+.neon-text {
+  /* color: #00ffff; */
+  color: #8BE9FD;
+  /* text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff; */
+}
+
+/* Neon card glow */
+.neon-card {
+  background: rgba(17, 24, 39, 0.75); /* semi-transparent dark */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  border-radius: 1rem;
+}
+
+/* Neon button glow */
+.btn-neon {
+  background: linear-gradient(90deg, #00ffff, #0077ff);
+  color: #0a0a0a;
+  font-weight: 600;
+
+  /* transition: all 0.2s ease; */
+  /* box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; */
+}
+
+/* .btn-neon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+} */
+ 
+
+/* .btn-outline-neon {
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  box-shadow: 0 6px 30px rgba(7, 12, 45, 0.5);
+} */
+
+/* Grid overlay pattern */
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Smooth fade for background transitions (optional aesthetic) */
+body {
+  @apply text-gray-100 bg-black transition-colors duration-300;
+  font-family: "Poppins", sans-serif;
+}

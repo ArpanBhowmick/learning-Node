@@ -9,7 +9,7 @@ export const shortUrl = async (req, res) => {
 
 
     // save to database
-    
+     
     const newUrl = new Url({shortCode, longUrl}) //creates a record that stores both the random short code and the original long URL together.
     //shortCode acts like a button to finds the longUrl in the same record and “calls it
 
