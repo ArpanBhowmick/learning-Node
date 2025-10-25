@@ -186,7 +186,8 @@ const MainCard = () => {
               —
             </a> */}
             
-            <p className="text-xs text-slate-400 truncate mt-1">Original URL will appear here</p>
+            <p className="text-xs text-slate-400 truncate mt-1">Shorted URL will appear here</p>
+            {/* Original URL will appear here */}
           </div>
           <div className="flex items-center gap-2">
             <button className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">

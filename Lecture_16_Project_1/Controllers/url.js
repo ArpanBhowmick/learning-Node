@@ -15,7 +15,9 @@ export const shortUrl = async (req, res) => {
 
     await newUrl.save(); //saves this record in MongoDB.
     console.log("shorturl saved = ", newUrl)
-    res.render("index.ejs", {shortUrl})
+
+    res.render("index.ejs", {shortUrl})  // passing shortUrl to EJS
+
 }
 
 export const getOriginalUrl = async (req, res) => {
