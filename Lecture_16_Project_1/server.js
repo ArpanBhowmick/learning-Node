@@ -24,7 +24,7 @@ app.post("/short", shortUrl)
 
 // i click on the shorted link it generaes a GET request and the server.js handles the request , its not connected to the ejs it handles the request by checking in the server.js automatically
 
-app.get("/:shortCode",getOriginalUrl)
+app.get("/:shortedCode",getOriginalUrl)
 
 
 app.listen(PORT,()=>console.log(`server is running on port ${PORT}`))

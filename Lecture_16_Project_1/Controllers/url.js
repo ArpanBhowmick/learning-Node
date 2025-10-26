@@ -22,7 +22,7 @@ export const shortUrl = async (req, res) => {
 
 export const getOriginalUrl = async (req, res) => {
 
-    const shortCode = req.params.shortCode
+    const shortCode = req.params.shortedCode
 
     // find on DB 
 

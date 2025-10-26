@@ -14,7 +14,7 @@
 //       </div>
 
 //       <form id="shrtnerForm"
-//        action="" 
+//        action=""
 //        className="mt-6 grid gap-4">
 //         <div
 //          className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -26,9 +26,8 @@
 //             className="col-span-2 rounded-lg px-4 py-3  border  border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 truncate"
 //           />
 
-           
 //           <input
-          
+
 //             type="text"
 //             placeholder="Custom-slug"
 //             className="rounded-lg px-4 py-3 bg-transparent border border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
@@ -43,14 +42,14 @@
 //             className="rounded-lg px-4 py-2 bg-transparent border border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm"
 //           />
 
-          // <button
-          //   type="submit"
-          //   className="ml-auto text-black font-semibold rounded-lg px-5 py-2 bg-gradient-to-r from-purple-600 to-cyan-400
-          // shadow-[0_6px_30px_rgba(7,12,45,0.6),0_0_16px_rgba(59,130,246,0.12)]
-          //  hover:from-green-700 hover:to-green-700 hover:text-white transition-all duration-300 cursor-pointer "
-          // >
-          //   Shorten
-          // </button>
+// <button
+//   type="submit"
+//   className="ml-auto text-black font-semibold rounded-lg px-5 py-2 bg-gradient-to-r from-purple-600 to-cyan-400
+// shadow-[0_6px_30px_rgba(7,12,45,0.6),0_0_16px_rgba(59,130,246,0.12)]
+//  hover:from-green-700 hover:to-green-700 hover:text-white transition-all duration-300 cursor-pointer "
+// >
+//   Shorten
+// </button>
 
 //           <button className="ml-2 px-3 py-2 rounded-lg text-sm border border-indigo-500/20 shadow-[0_6px_30px_rgba(7,12,45,0.5)] hover:bg-white/5">
 //             clear
@@ -94,30 +93,49 @@
 
 // export default MainCard;
 
-
-
-
-
-
-
-
-
-
-
-
 // src/components/MainCard.jsx
 
+import { useState } from "react";
 import "../index.css"; // import neon utilities
+import toast from "react-hot-toast";
+
+
 
 const MainCard = () => {
+  const [longUrl, setLongUrl] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
+  const [customSlug, setCustomSlug] = useState("")
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/short", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ longUrl, customSlug }),
+      });
+
+      const data = await res.json();
+      setShortUrl(data.shortUrl);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <section className="neon-card rounded-3xl p-6 enter show">
       {/* Header inside card */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold neon-accent">Shorten any link — instantly</h2>
+          <h2 className="text-xl font-bold neon-accent">
+            Shorten any link — instantly
+          </h2>
           <p className="text-slate-400 mt-1 text-sm max-w-xl">
-            Paste your long URL and get a compact, shareable link. Includes history, copy, QR, and demo generation for offline use.
+            Paste your long URL and get a compact, shareable link. Includes
+            history, copy, QR, and demo generation for offline use.
           </p>
         </div>
 
@@ -127,22 +145,33 @@ const MainCard = () => {
             Frontend Demo
           </div>
         </div> */}
-        
       </div>
 
       {/* URL Shortener Form */}
-      <form className="mt-6 grid gap-4">
+
+      <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
         {/* Inputs */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+
+          {/* long URL */}
+
           <input
             type="url"
+            value={longUrl}
+            onChange={(e) => setLongUrl(e.target.value)}
             placeholder="https://example.com/very/long/path"
             required
             className="col-span-2 rounded-lg px-4 py-3 bg-transparent border border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           />
+
+            {/* custom-slug  */}
+
           <input
             type="text"
-            placeholder="custom-slug (opt)"
+            value={customSlug}      
+            onChange={(e)=> setCustomSlug(e.target.value)}
+            placeholder="custom-slug (optional)"
             className="rounded-lg px-4 py-3 bg-transparent border border-indigo-700/20 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           />
         </div>
@@ -161,10 +190,9 @@ const MainCard = () => {
             hover:from-green-700 hover:to-green-700 hover:text-white transition-all duration-300 cursor-pointer
             "
           >
-            {/* hover:scale-105 transform transition-transform */}
-
             Shorten
           </button>
+
           <button
             type="button"
             className="ml-2 px-3 py-2 rounded-lg text-sm border border-purple-400/30 hover:bg-white/5  "
@@ -177,35 +205,54 @@ const MainCard = () => {
         <p className="text-sm text-rose-400 h-5"></p>
       </form>
 
-      {/* Result / preview area (static placeholder for now) */}
+      {/* Shorted Result / preview area (static placeholder for now) */}
       <div className="mt-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-black/30 border border-indigo-700/30 rounded-lg p-4">
-          <div className="min-w-0 truncate">
+        {shortUrl && (
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-black/30 border border-indigo-700/30 rounded-lg p-4">
+            <div className="min-w-0 truncate">
+              <a
+                href={shortUrl}
+                target="_blank"
+                rel="noopener"
+                className="font-semibold text-cyan-300 truncate"
+              >
+                {shortUrl}
+              </a>
 
-            {/* <a href="#" target="_blank" rel="noopener" className="font-semibold text-cyan-300 truncate">
-              —
-            </a> */}
-            
-            <p className="text-xs text-slate-400 truncate mt-1">Shorted URL will appear here</p>
-            {/* Original URL will appear here */}
+              {/* Original URL will appear here */}
+              <p className="text-xs text-slate-400 truncate mt-1">{longUrl}</p>
+            </div>
+
+            <div className="flex items-center gap-2">
+
+              {/* Copy Button */}
+
+              <button
+              onClick={()=> {
+                navigator.clipboard.writeText(shortUrl);
+                toast.success("Copied to clipboad!");
+              }}
+              className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">
+                Copy
+              </button>
+
+              {/* open button */}
+
+              <button
+              onClick={() => window.open(shortUrl, "_blank")}
+              className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">
+                Open
+              </button>
+
+              <button className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">
+                QR
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">
-              Copy
-            </button>
-            <button className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">
-              Open
-            </button>
-            <button className="px-3 py-2 rounded-lg bg-transparent border border-indigo-700/20 hover:bg-white/5">
-              QR
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );
 };
 
 export default MainCard;
-
-
