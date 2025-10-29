@@ -16,7 +16,7 @@ function App() {
     <Background>
       <Header />
       <MainCard/>
-      <History/>
+      {/* <History/> */}
       
       <Footer />
       <Toaster

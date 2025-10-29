@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 
-
+// Middlewares
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +32,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/short", shortUrl)
+ // The "/short" here is just a route name , You could name it anything you want As long as your frontend sends the request to the same path, it will work.
+//  So this: // fetch("http://localhost:5000/make", { method: "POST", ... });  will call: app.post("/make", shortUrl);
+
+
 
 app.get("/:shortedCode",getOriginalUrl)
 

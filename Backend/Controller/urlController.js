@@ -4,10 +4,11 @@ import shortid from "shortid"
 export const shortUrl = async (req, res) => {
 
     try {
-        const { longUrl, customSlug } = req.body;
+        let { longUrl, customSlug, expiryDays } = req.body;
     
         longUrl = longUrl?.trim()
         
+        // Validate long URL
     if (!longUrl) return res.status(400).json({message: "URL required" })
 
 
@@ -26,10 +27,28 @@ export const shortUrl = async (req, res) => {
 
     const shortUrl = `http://localhost:5000/${shortCode}`
 
+    // calculate expiry days 
+    let expireAt = null
+
+    if(expiryDays && expiryDays > 0 ) {    
+        expireAt = new Date(Date.now() + expiryDays * 24 * 60 * 60 * 1000 )
+    }
+
+    
+
+//     The first expiryDays part checks that the value exists (not undefined or empty).
+// The second part expiryDays > 0 checks that the user didn’t type “0”. If both are true, then we calculate the expiry date.
+
+
 
     // save to database
      
-    const newUrl = new Url({shortCode, longUrl}) //creates a record that stores both the random short code and the original long URL together.
+    const newUrl = new Url({
+        shortCode,
+         longUrl,
+         expireAt,
+    }) 
+    //creates a record that stores both the random short code and the original long URL together.
     //shortCode acts like a button to finds the longUrl in the same record and “calls it
 
     await newUrl.save(); //saves this record in MongoDB.
