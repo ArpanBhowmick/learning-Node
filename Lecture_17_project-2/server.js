@@ -4,7 +4,8 @@ import multer from "multer";
 import { v2 as cloudinary } from 'cloudinary';
 import path from "path"
 import "dotenv/config";
-import File from "./model/File.js";
+// import File from "../model/File.js";
+import { uploadImage } from "./controller/uploadController.js";
 
 
 
@@ -30,11 +31,7 @@ mongoose
   .catch((err) => console.log(err));
 
 
-//   rendering ejs file 
-// Loads the main upload page and sends url: null because no image yet.
-app.get("/", (req, res) => {
-    res.render("index.ejs", {url: null} )
-})
+
 
 
 
@@ -60,6 +57,16 @@ const upload = multer({ storage: storage })
 
 
 
+// --- Routes --- //
+
+//   rendering ejs file 
+// Loads the main upload page and sends url: null because no image yet.
+app.get("/", (req, res) => {
+    res.render("index.ejs", {url: null} )
+})
+
+
+
 // Mongoose Schema
 // This defines what will be saved in the database:
 // fileName → original filename
@@ -81,12 +88,15 @@ const upload = multer({ storage: storage })
 // Upload Route
 // upload.single("file") means your form has: <input type="file" name="file">
 // Multer saves the file and attaches info in req.file
-app.post('/upload', upload.single('file'), async (req, res) => {
-  try {
+
+
+app.post("/upload", upload.single("file"), uploadImage);
+// app.post('/upload', upload.single('file'), async (req, res) => {
+//   try {
 
     // req.file.path gives local path like: public/uploads/file-169938234232.jpg
 
-  const file = req.file.path
+  // const file = req.file.path
 
 // Upload to Cloudinary
 // This sends file → Cloudinary
@@ -97,7 +107,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
           // size
           // etc.
 
-  const  cloudinaryRes = await cloudinary.uploader.upload(file, {folder: "nodeJS_Mastery_Course",})
+  // const  cloudinaryRes = await cloudinary.uploader.upload(file, {folder: "nodeJS_Mastery_Course",})
 
   // Save to Database
   
@@ -105,24 +115,26 @@ app.post('/upload', upload.single('file'), async (req, res) => {
             // filename
             // Cloudinary’s public ID
             // Live image URL
-  const db = await File.create({
-    fileName: req.file.originalname,
-    public_id: cloudinaryRes.public_id,
-    imgUrl: cloudinaryRes.secure_url,
-  })
+
+  // const db = await File.create({
+  //   fileName: req.file.originalname,
+  //   public_id: cloudinaryRes.public_id,
+  //   imgUrl: cloudinaryRes.secure_url,
+  // });
   
    // Render Page with Image
 //  Reloads the page and shows the uploaded image.
-  res.render("index.ejs", {url: cloudinaryRes.secure_url});
-  } catch (err) {
+
+  // res.render("index.ejs", {url: cloudinaryRes.secure_url});
+  // } catch (err) {
     
-  }
+  // }
   
 
  
 
   // res.json({message: "file uploaded successfully", cloudinaryRes})
-})
+// })
 
 
 
