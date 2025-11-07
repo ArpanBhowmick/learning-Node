@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
-import File from "../model/File.js";
+import File from "../Model/File.js";
 
 
 export const uploadImage = async(req, res) => {
@@ -7,6 +7,7 @@ export const uploadImage = async(req, res) => {
 
         // req.file.path gives local path like: public/uploads/file-169938234232.jpg
         const filePath = req.file.path;
+        console.log(req.file);
 
 
         // Upload to Cloudinary

@@ -5,7 +5,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import path from "path"
 import "dotenv/config";
 // import File from "../model/File.js";
-import { uploadImage } from "./controller/uploadController.js";
+import { uploadImage } from "./Controller/uploadController.js";
 
 
 
@@ -50,6 +50,17 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + "-" + uniqueSuffix)
   }
 })
+//Multer creates req.file automatically.
+// And originalname is a property inside req.file.
+//In server.js or uploadController.js: console.log(req.file);
+// You will see something like this printed in your terminal:
+// {
+//   fieldname: 'file',
+//   originalname: 'mypic.jpg',
+//   encoding: '7bit',.....
+
+
+
 
 // Multer Upload Middleware
 // This creates the upload function that you use inside your POST route.
@@ -62,7 +73,7 @@ const upload = multer({ storage: storage })
 //   rendering ejs file 
 // Loads the main upload page and sends url: null because no image yet.
 app.get("/", (req, res) => {
-    res.render("index.ejs", {url: null} )
+    res.render("index.ejs", {url: null})
 })
 
 
